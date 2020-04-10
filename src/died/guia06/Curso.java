@@ -1,6 +1,9 @@
 package died.guia06;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import died.guia06.util.Registro;
@@ -29,8 +32,50 @@ public class Curso {
 		super();
 		this.inscriptos = new ArrayList<Alumno>();
 		this.log = new Registro();
+	}	
+
+	public Integer getId() {
+		return id;
 	}
-	
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public Integer getCupo() {
+		return cupo;
+	}
+
+	public void setCupo(Integer cupo) {
+		this.cupo = cupo;
+	}
+
+	public Integer getCreditos() {
+		return creditos;
+	}
+
+	public void setCreditos(Integer creditos) {
+		this.creditos = creditos;
+	}
+
+	public Integer getCreditosRequeridos() {
+		return creditosRequeridos;
+	}
+
+	public void setCreditosRequeridos(Integer creditosRequeridos) {
+		this.creditosRequeridos = creditosRequeridos;
+	}
+
+
+
 
 	/**
 	 * Este método, verifica si el alumno se puede inscribir y si es así lo agrega al curso,
@@ -45,8 +90,22 @@ public class Curso {
 	 * @param a
 	 * @return
 	 */
-	public Boolean inscribir(Alumno a) {
-		log.registrar(this, "inscribir ",a.toString());
+	public boolean inscribir(Alumno a) {
+		try {
+			if(a.creditosObtenidos()<this.creditosRequeridos)
+				return false;
+			if(this.inscriptos.size()>=cupo)
+				return false;
+			if(a.getCursando().size()>=3)
+				return false;
+			else{
+				log.registrar(this, "inscribir ",a.toString());
+				a.inscripcionAceptada(this);
+				return true;
+			}
+		} catch(IOException e) {
+			System.err.println("Error E/S : "+e.getMessage());
+		}
 		return false;
 	}
 	
@@ -55,7 +114,13 @@ public class Curso {
 	 * imprime los inscriptos en orden alfabetico
 	 */
 	public void imprimirInscriptos() {
-		log.registrar(this, "imprimir listado",this.inscriptos.size()+ " registros ");
+		try {
+			Collections.sort(this.inscriptos, new ComparaOrdAlfabetico());
+			System.out.println(this.inscriptos);
+			log.registrar(this, "imprimir listado",this.inscriptos.size()+ " registros ");
+		} catch (IOException e) {
+			System.err.println("Error E/S : "+e.getMessage());
+		}
 	}
 
 
