@@ -2,68 +2,65 @@ package died.guia06;
 
 import static org.junit.Assert.*;
 
+import org.junit.Before;
 import org.junit.Test;
+import java.util.*;
 
-class AlumnoTest {
-
-	@Test
-	void testCreditosObtenidos() {
-		List<Curso> listCursos = new ArrayList<Curso>();
-		Curso c1 = new Curso(30);
-		listCursos.add(c1);
-		Curso c2 = new Curso(20);
-		listCursos.add(c2);
-		Alumno unAlum = new Alumno();
-		unAlum.setAprobados(listCursos);
-		
-		assertSame(50, unAlum.creditosObtenidos());
+public class AlumnoTest {
+	List<Curso> list1, list2;
+	Alumno unAlum;
+	Curso c1, c2;
+	
+	public AlumnoTest() {}
+	
+	@Before
+	public void setUp(){
+		list1 = new ArrayList<Curso>();
+		list2 = new ArrayList<Curso>();
+		unAlum = new Alumno();
+		c1 = new Curso();
+		c2 = new Curso();
 	}
-/*
+	
 	@Test
-	void testAprobarEliminaCursada() {
-		List<Curso> list1 = new ArrayList<Curso>();
-		List<Curso> list2 = new ArrayList<Curso>();
-		Alumno unAlum = new Alumno();
+	public void testCreditosObtenidos() {
+		c1 = new Curso();
+		list1.add(c1);
+		c2 = new Curso();
+		list1.add(c2);
+		unAlum.setAprobados(list1);
+		int results = unAlum.creditosObtenidos();
 		
-		Curso unCurso = new Curso();
-		unCurso.setId(1234);
-		list1.add(unCurso);
+		assertEquals(50, results);
+	}
+	
+	@Test
+	public void testAprobarEliminaCursada() {
+		list1.add(c1);
 		unAlum.setCursando(list1);				// estaba cursando un curso
 		
-		unAlum.aprobar(unCurso);				// lo aprueba
+		unAlum.aprobar(c1);						// lo aprueba
 		
 		assertSame(unAlum.getCursando(), list2);// deberia quedar sin cursos en cursando
 	}
 	
 	@Test
-	void testAprobarAgregaAprobada() {
-		List<Curso> list1 = new ArrayList<Curso>();
-		List<Curso> list2 = new ArrayList<Curso>();
-		Alumno unAlum = new Alumno();
-		
-		Curso unCurso = new Curso();
-		unCurso.setId(1234);
-		list2.add(unCurso);
+	public void testAprobarAgregaAprobada() {
+		list2.add(c1);
 		unAlum.setCursando(list1);
-		
-		unAlum.aprobar(unCurso);
+		unAlum.aprobar(c1);
 		
 		assertSame(unAlum.getAprobados(), list2);
 	}
 	@Test
-	void testInsripcionAceptada() {
-		List<Curso> list1 = new ArrayList<Curso>();
-		List<Curso> list2 = new ArrayList<Curso>();
-		Alumno unAlum = new Alumno();
-		
-		Curso unCurso = new Curso();
-		unCurso.setId(1234);
-		list2.add(unCurso);
+	public void testInsripcionAceptada() {
+		c1.setId(1234);
+		list2.add(c1);
 		unAlum.setCursando(list1);
 		
-		unAlum.inscripcionAceptada(unCurso);
+		unAlum.inscripcionAceptada(c1);
 		
 		assertSame(unAlum.getCursando(), list2);
-	}*/
+	}
 }
 

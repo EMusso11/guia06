@@ -17,6 +17,15 @@ public class Alumno implements Comparable {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
+	
+
+	public void setAprobados(List<Curso> listCursos) {
+		aprobados = listCursos;	
+	}
+	
+	public void setCursando(List<Curso> listCursos) {
+		aprobados = listCursos;	
+	}
 
 	public Integer getNroLibreta() {
 		return nroLibreta;
@@ -34,8 +43,8 @@ public class Alumno implements Comparable {
 		return cursando;
 	}
 
-	public int creditosObtenidos() {
-		int credit=0;
+	public Integer creditosObtenidos() {
+		Integer credit=0;
 		for(Curso unCurso : cursando){
 			credit+=unCurso.getCreditos();
 		}
