@@ -73,6 +73,14 @@ public class Curso {
 	public void setCreditosRequeridos(Integer creditosRequeridos) {
 		this.creditosRequeridos = creditosRequeridos;
 	}
+	
+	public List<Alumno> getInscriptos() {
+		return inscriptos;
+	}
+	
+	public void setInscriptos(List<Alumno> list) {
+		this.inscriptos = list;
+	}
 
 
 
