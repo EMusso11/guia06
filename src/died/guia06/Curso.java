@@ -20,9 +20,9 @@ public class Curso {
 
 	private Integer id;
 	private String nombre;
-	private Integer cicloLectivo;
-	private Integer cupo; 
+	private Integer cicloLectivo; 
 	private List<Alumno> inscriptos;
+	private Integer cupo;
 	private Integer creditos;
 	private Integer creditosRequeridos;
 	
@@ -32,7 +32,17 @@ public class Curso {
 		super();
 		this.inscriptos = new ArrayList<Alumno>();
 		this.log = new Registro();
-	}	
+	}
+	
+	public Curso(String nombre, Integer creditos, Integer creditosRequeridos, Integer cupo) {
+		super();
+		this.inscriptos = new ArrayList<Alumno>();
+		this.log = new Registro();
+		this.nombre = nombre;
+		this.creditos = creditos;
+		this.creditosRequeridos = creditosRequeridos;
+		this.cupo = cupo;
+	}
 
 	public Integer getId() {
 		return id;
@@ -82,8 +92,10 @@ public class Curso {
 		this.inscriptos = list;
 	}
 
-
-
+	@Override
+	public String toString() {
+		return "Curso [id=" + id + ", nombre=" + nombre + "]";
+	}
 
 	/**
 	 * Este método, verifica si el alumno se puede inscribir y si es así lo agrega al curso,
@@ -109,6 +121,7 @@ public class Curso {
 			else{
 				log.registrar(this, "inscribir ",a.toString());
 				a.inscripcionAceptada(this);
+				inscriptos.add(a);
 				return true;
 			}
 		} catch(IOException e) {
