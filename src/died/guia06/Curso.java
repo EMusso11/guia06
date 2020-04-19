@@ -149,7 +149,9 @@ public class Curso {
 				throw new CreditosInsuficientesException("Los creditos obtenidos("+a.creditosObtenidos()+") no alcanzan los requeridos("+this.getCreditosRequeridos()+").");
 			if(this.inscriptos.size()>=cupo)
 				throw new CupoCubiertoException("El cupo ya esta completo.");
-			log.registrar(this, "imprimir listado",this.inscriptos.size()+ " registros ");
+			log.registrar(this, "inscribir ",a.toString());
+			a.inscripcionAceptada(this);
+			inscriptos.add(a);
 		} catch(IOException e) {
 			throw new RegistroAuditoriaException();
 		}

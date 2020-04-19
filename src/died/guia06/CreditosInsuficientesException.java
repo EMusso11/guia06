@@ -14,8 +14,4 @@ public class CreditosInsuficientesException extends Exception {
 		super(message);
 	}
 	
-	
-	
-	
-	
 }

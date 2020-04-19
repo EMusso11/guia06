@@ -2,10 +2,12 @@ package died.guia06;
 
 import java.util.*;
 
+import died.guia06.util.RegistroAuditoriaException;
+
 public class App {
 
-	public static void main(String[] args) {
-		Curso c1 = new Curso("DIED", 10, 40, 2);
+	public static void main(String[] args) throws CupoCubiertoException, RegistroAuditoriaException {
+		Curso c1 = new Curso("DIED", 10, 40, 1);
 		Curso c2 = new Curso("Algoritmos", 40, 0, 10);
 		Curso c3 = new Curso("Fisica", 20, 0, 10);
 		Curso c4 = new Curso("Gestion de Datos", 10, 10, 10);
@@ -22,9 +24,18 @@ public class App {
 		c2.inscribir(a1);
 		a1.aprobar(c2);						// alcanza los creditos para inscribirese a c1
 		
-		if(!c1.inscribir(a1)) System.out.println("No se ha podido inscribir a "+c1.getNombre());
-		if(!c3.inscribir(a1)) System.out.println("No se ha podido inscribir a "+c3.getNombre());
-		if(!c4.inscribir(a1)) System.out.println("No se ha podido inscribir a "+c4.getNombre());
+//		if(!c1.inscribir(a1)) System.out.println("No se ha podido inscribir a "+c1.getNombre());
+//		if(!c3.inscribir(a1)) System.out.println("No se ha podido inscribir a "+c3.getNombre());
+//		if(!c4.inscribir(a1)) System.out.println("No se ha podido inscribir a "+c4.getNombre());
+		try{
+			c1.inscribirAlumno(a1);
+			c3.inscribirAlumno(a1);
+			c4.inscribirAlumno(a1);
+		} catch(CreditosInsuficientesException e) {
+			System.err.println(e.getMessage());
+		} catch(CupoCubiertoException e) {
+			System.err.println(e.getMessage());
+		}
 		
 		System.out.println("Creditos de "+a1.getNombre()+" -> "+a1.creditosObtenidos());
 		
@@ -47,8 +58,18 @@ public class App {
 		System.out.println("-------------------"+a2.getNombre()+"-----------------------");
 		if(!c3.inscribir(a2)) System.out.println("No se ha podido inscribir a "+c3.getNombre());
 		a2.aprobar(c3);
-		if(!c1.inscribir(a2)) System.out.println("No se ha podido inscribir a "+c1.getNombre());
-		if(!c4.inscribir(a2)) System.out.println("No se ha podido inscribir a "+c4.getNombre());
+//		if(!c1.inscribir(a2)) System.out.println("No se ha podido inscribir a "+c1.getNombre());
+//		if(!c4.inscribir(a2)) System.out.println("No se ha podido inscribir a "+c4.getNombre());
+		
+		
+		try{
+			c1.inscribirAlumno(a1);
+			c4.inscribirAlumno(a2);
+		} catch(CreditosInsuficientesException e) {
+			System.err.println(e.getMessage());
+		} catch(CupoCubiertoException e) {
+			System.err.println(e.getMessage());
+		}
 		
 		
 		System.out.println("Creditos de "+a2.getNombre()+" -> "+a2.creditosObtenidos());
@@ -70,9 +91,19 @@ public class App {
 		
 		Alumno a3 = new Alumno("Carl", (Integer)24800);	//intentar inscribir a c1
 		System.out.println("-------------------"+a3.getNombre()+"-----------------------");
-		if(!c3.inscribir(a3)) System.out.println("No se ha podido inscribir a "+c3.getNombre());
-		if(!c1.inscribir(a3)) System.out.println("No se ha podido inscribir a "+c1.getNombre());
-		if(!c4.inscribir(a3)) System.out.println("No se ha podido inscribir a "+c4.getNombre());
+//		if(!c3.inscribir(a3)) System.out.println("No se ha podido inscribir a "+c3.getNombre());
+//		if(!c1.inscribir(a3)) System.out.println("No se ha podido inscribir a "+c1.getNombre());
+//		if(!c4.inscribir(a3)) System.out.println("No se ha podido inscribir a "+c4.getNombre());
+		
+		try{
+			c3.inscribirAlumno(a3);
+			c1.inscribirAlumno(a3);
+			c4.inscribirAlumno(a3);
+		} catch(CreditosInsuficientesException e) {
+			System.err.println(e.getMessage());
+		} catch(CupoCubiertoException e) {
+			System.err.println(e.getMessage());
+		}
 		
 		System.out.println("Creditos de "+a3.getNombre()+" -> "+a3.creditosObtenidos());
 		
