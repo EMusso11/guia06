@@ -55,7 +55,7 @@ public class Alumno implements Comparable {
 		return cursando;
 	}
 	
-		@Override
+	@Override
 	public String toString() {
 		return "Alumno [nombre=" + nombre + ", nroLibreta=" + nroLibreta + "]";
 	}

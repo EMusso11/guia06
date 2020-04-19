@@ -1,12 +1,12 @@
 package died.guia06;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
+import java.lang.Exception;
+import java.lang.Throwable;
 
 import died.guia06.util.Registro;
+import died.guia06.util.RegistroAuditoriaException;
 
 /**
  * Clase que representa un curso. Un curso se identifica por su ID y por su nombre y ciclo lectivo.
@@ -24,7 +24,7 @@ public class Curso {
 	private List<Alumno> inscriptos;
 	private Integer cupo;
 	private Integer creditos;
-	private Integer creditosRequeridos;
+	private Integer creditosRequeridos; 
 	
 	private Registro log;
 	
@@ -130,6 +130,32 @@ public class Curso {
 		return false;
 	}
 	
+	
+	/*
+	 * Luego en el punto 7 cuando tienen que crear excepciones personalizadas,
+	 * si el método retornará verdadero si pudo inscribir y lanzará una excepción
+	 * por cada posible error (de lógica o de registro).
+	 * En este caso es probable que el método nunca retorne falso, y si lo rediseñamos,
+	 * podríamos ver que podría no retornar nada (void) dado que ejecuta exitosamente y
+	 * me inscribió o lanza una excepción
+	 * */
+	
+	public void inscribirAlumno(Alumno a) throws 	CreditosInsuficientesException,
+													CupoCubiertoException,
+													RegistroAuditoriaException {
+		
+		try {
+			if(a.creditosObtenidos()<this.creditosRequeridos)
+				throw new CreditosInsuficientesException("Los creditos obtenidos("+a.creditosObtenidos()+") no alcanzan los requeridos("+this.getCreditosRequeridos()+").");
+			if(this.inscriptos.size()>=cupo)
+				throw new CupoCubiertoException("El cupo ya esta completo.");
+			log.registrar(this, "imprimir listado",this.inscriptos.size()+ " registros ");
+		} catch(IOException e) {
+			throw new RegistroAuditoriaException();
+		}
+		
+			
+	}
 	
 	/**
 	 * imprime los inscriptos en orden alfabetico

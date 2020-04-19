@@ -86,11 +86,9 @@ public class App {
 		};
 		
 		
-		System.out.println("-------------------"+c2.getNombre()+"-----------------------");
+		System.out.println("-------------------"+c3.getNombre()+"-----------------------");
 		System.out.println("Contiene los siguientes alumnos : ");
-		for(Alumno unAlum : c2.getInscriptos()){
-			System.out.println(unAlum.getNombre());
-		};
+		c3.imprimirInscriptos();
 		
 	}
 }
